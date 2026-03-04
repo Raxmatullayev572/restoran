@@ -1,0 +1,455 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="description" content="Bahor Restaurant — Toshkentdagi milliy va yevropa taomlari. Bron qilish, menyu va manzil."/>
+  <meta name="keywords" content="restoran toshkent, milliy taomlar, yevropa taomlari, bron qilish, bahor restoran"/>
+  <title>Bahor Restaurant — Toshkent</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Inter:wght@400;500;600&display=swap" rel="stylesheet"/>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --gold:   #c9a84c;
+      --dark:   #1a1208;
+      --cream:  #fdf8f0;
+      --warm:   #f5ede0;
+      --muted:  #8a7a60;
+      --white:  #ffffff;
+    }
+    body { font-family: 'Inter', sans-serif; background: var(--cream); color: var(--dark); overflow-x: hidden; }
+    a { text-decoration: none; }
+
+    /* NAV */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      background: rgba(26,18,8,0.95); backdrop-filter: blur(12px);
+      padding: 0 6vw; height: 62px;
+      display: flex; align-items: center; justify-content: space-between;
+    }
+    .nav-logo { font-family: 'Playfair Display', serif; font-size: 22px; color: var(--gold); letter-spacing: 1px; }
+    .nav-links { display: flex; gap: 28px; }
+    .nav-links a { font-size: 13px; color: rgba(255,255,255,0.6); transition: color .2s; }
+    .nav-links a:hover { color: var(--gold); }
+    .nav-btn {
+      background: var(--gold); color: var(--dark);
+      font-size: 13px; font-weight: 600;
+      padding: 9px 22px; border-radius: 4px;
+    }
+
+    /* HERO */
+    .hero {
+      min-height: 100vh; padding-top: 62px;
+      background: linear-gradient(160deg, #1a1208 0%, #2d1f0a 50%, #1a1208 100%);
+      display: flex; align-items: center; justify-content: center;
+      text-align: center; position: relative; overflow: hidden;
+      padding-left: 5vw; padding-right: 5vw;
+    }
+    .hero::before {
+      content: ''; position: absolute; inset: 0;
+      background: radial-gradient(ellipse at 50% 40%, rgba(201,168,76,0.12) 0%, transparent 65%);
+    }
+    .hero-inner { position: relative; z-index: 1; }
+    .hero-tag {
+      display: inline-block;
+      border: 1px solid rgba(201,168,76,0.3); color: var(--gold);
+      font-size: 11px; letter-spacing: 3px; text-transform: uppercase;
+      padding: 7px 20px; border-radius: 2px; margin-bottom: 28px;
+    }
+    .hero h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(44px, 8vw, 88px);
+      color: var(--white); line-height: 1.0; letter-spacing: -1px;
+      margin-bottom: 12px;
+    }
+    .hero h1 span { color: var(--gold); display: block; font-style: italic; }
+    .hero-sub { font-size: 16px; color: rgba(255,255,255,0.5); margin-bottom: 44px; line-height: 1.7; }
+    .hero-btns { display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; }
+    .btn-gold {
+      background: var(--gold); color: var(--dark);
+      font-weight: 700; font-size: 14px;
+      padding: 15px 40px; border-radius: 4px;
+      transition: opacity .2s;
+    }
+    .btn-gold:hover { opacity: .85; }
+    .btn-outline {
+      border: 1px solid rgba(201,168,76,0.4); color: var(--gold);
+      font-size: 14px; font-weight: 500;
+      padding: 15px 40px; border-radius: 4px;
+      transition: border-color .2s;
+    }
+    .btn-outline:hover { border-color: var(--gold); }
+    .hero-stats {
+      display: flex; gap: 48px; justify-content: center;
+      margin-top: 64px; flex-wrap: wrap;
+    }
+    .hstat-num { font-family: 'Playfair Display', serif; font-size: 38px; color: var(--gold); line-height: 1; }
+    .hstat-lbl { font-size: 12px; color: rgba(255,255,255,0.4); margin-top: 4px; letter-spacing: 1px; }
+
+    /* STRIP */
+    .strip {
+      background: var(--gold); padding: 14px 6vw;
+      display: flex; gap: 32px; justify-content: center; flex-wrap: wrap;
+    }
+    .strip span { font-size: 13px; font-weight: 600; color: var(--dark); display: flex; align-items: center; gap: 8px; }
+
+    /* SECTION */
+    .sec { padding: 90px 6vw; }
+    .sec-center { text-align: center; }
+    .sec-tag {
+      display: inline-block; font-size: 11px; font-weight: 600;
+      letter-spacing: 3px; text-transform: uppercase;
+      color: var(--gold); margin-bottom: 12px;
+    }
+    .sec-title {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(32px, 4vw, 56px); letter-spacing: -1px;
+      line-height: 1.08; margin-bottom: 18px;
+    }
+    .sec-sub { font-size: 16px; color: var(--muted); line-height: 1.75; max-width: 520px; margin: 0 auto 56px; }
+
+    /* MENU */
+    #menu { background: var(--white); }
+    .menu-tabs { display: flex; gap: 0; justify-content: center; margin-bottom: 48px; border-bottom: 2px solid #ede8e0; }
+    .mtab {
+      font-size: 13px; font-weight: 600; padding: 12px 28px;
+      color: var(--muted); cursor: pointer; border-bottom: 2px solid transparent;
+      margin-bottom: -2px; transition: all .2s;
+    }
+    .mtab.active { color: var(--gold); border-bottom-color: var(--gold); }
+    .menu-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+    .menu-card {
+      border: 1px solid #ede8e0; border-radius: 8px; overflow: hidden;
+      transition: box-shadow .25s, transform .25s;
+    }
+    .menu-card:hover { box-shadow: 0 8px 32px rgba(26,18,8,0.08); transform: translateY(-4px); }
+    .menu-img {
+      background: var(--warm); height: 160px;
+      display: flex; align-items: center; justify-content: center; font-size: 56px;
+    }
+    .menu-body { padding: 18px; }
+    .menu-name { font-family: 'Playfair Display', serif; font-size: 17px; margin-bottom: 6px; }
+    .menu-desc { font-size: 12px; color: var(--muted); line-height: 1.6; margin-bottom: 14px; }
+    .menu-footer { display: flex; align-items: center; justify-content: space-between; }
+    .menu-price { font-family: 'Playfair Display', serif; font-size: 20px; color: var(--gold); }
+    .menu-badge { font-size: 10px; font-weight: 600; padding: 3px 10px; border-radius: 2px; }
+    .badge-hit { background: rgba(201,168,76,0.12); color: var(--gold); }
+    .badge-new { background: rgba(34,197,94,0.1); color: #16a34a; }
+    .badge-eu  { background: rgba(59,130,246,0.1); color: #2563eb; }
+
+    /* ABOUT */
+    #about { background: var(--cream); }
+    .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center; }
+    .about-emoji-wall {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 16px;
+    }
+    .ae-card {
+      background: var(--white); border-radius: 12px; padding: 28px 20px; text-align: center;
+      border: 1px solid #ede8e0;
+      transition: box-shadow .25s;
+    }
+    .ae-card:hover { box-shadow: 0 8px 24px rgba(26,18,8,0.07); }
+    .ae-card:nth-child(2), .ae-card:nth-child(4) { margin-top: 20px; }
+    .ae-icon { font-size: 32px; margin-bottom: 10px; }
+    .ae-title { font-size: 14px; font-weight: 600; margin-bottom: 4px; }
+    .ae-sub { font-size: 12px; color: var(--muted); }
+    .about-right .sec-title { text-align: left; }
+    .about-right .sec-sub { text-align: left; margin: 0 0 36px; }
+    .about-list { display: flex; flex-direction: column; gap: 16px; }
+    .al-item { display: flex; align-items: flex-start; gap: 14px; }
+    .al-dot { width: 8px; height: 8px; background: var(--gold); border-radius: 50%; margin-top: 6px; flex-shrink: 0; }
+    .al-text { font-size: 15px; color: var(--muted); line-height: 1.6; }
+
+    /* BRON */
+    #bron { background: var(--dark); }
+    .bron-inner { max-width: 680px; margin: 0 auto; text-align: center; }
+    #bron .sec-title { color: var(--white); }
+    #bron .sec-sub { color: rgba(255,255,255,0.4); }
+    .bron-cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-bottom: 44px; }
+    .bron-card {
+      background: rgba(255,255,255,0.05); border: 1px solid rgba(201,168,76,0.2);
+      border-radius: 8px; padding: 24px 16px; text-align: center;
+    }
+    .bc-icon { font-size: 28px; margin-bottom: 10px; }
+    .bc-title { font-size: 13px; font-weight: 600; color: var(--white); margin-bottom: 4px; }
+    .bc-val { font-size: 13px; color: var(--gold); }
+    .bron-btns { display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; }
+    .btn-tg { background: #229ED9; color: #fff; font-weight: 700; font-size: 14px; padding: 15px 36px; border-radius: 4px; }
+    .btn-call { background: transparent; border: 1px solid var(--gold); color: var(--gold); font-weight: 600; font-size: 14px; padding: 15px 36px; border-radius: 4px; }
+
+    /* REVIEWS */
+    #reviews { background: var(--white); }
+    .rev-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+    .rev-card { background: var(--cream); border-radius: 8px; padding: 28px 24px; border: 1px solid #ede8e0; }
+    .rev-stars { color: var(--gold); font-size: 14px; letter-spacing: 2px; margin-bottom: 14px; }
+    .rev-text { font-family: 'Playfair Display', serif; font-style: italic; font-size: 16px; line-height: 1.55; margin-bottom: 18px; color: var(--dark); }
+    .rev-name { font-size: 13px; font-weight: 600; color: var(--dark); }
+    .rev-loc { font-size: 12px; color: var(--muted); margin-top: 2px; }
+
+    /* MAP */
+    #manzil { background: var(--cream); }
+    .manzil-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 56px; align-items: start; }
+    .manzil-info h3 { font-family: 'Playfair Display', serif; font-size: 28px; margin-bottom: 28px; }
+    .minfo-item { display: flex; gap: 14px; margin-bottom: 20px; align-items: flex-start; }
+    .mi-icon { font-size: 20px; flex-shrink: 0; }
+    .mi-label { font-size: 12px; color: var(--muted); margin-bottom: 2px; letter-spacing: 1px; text-transform: uppercase; }
+    .mi-val { font-size: 15px; font-weight: 600; color: var(--dark); }
+    .map-placeholder {
+      background: var(--warm); border-radius: 12px; height: 320px;
+      display: flex; flex-direction: column; align-items: center; justify-content: center;
+      border: 1px solid #ede8e0; gap: 12px;
+    }
+    .map-placeholder span:first-child { font-size: 48px; }
+    .map-placeholder span:last-child { font-size: 14px; color: var(--muted); }
+
+    /* FOOTER */
+    footer {
+      background: #0d0a04; padding: 44px 6vw;
+      display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 20px;
+    }
+    .footer-logo { font-family: 'Playfair Display', serif; font-size: 22px; color: var(--gold); }
+    footer p { font-size: 12px; color: rgba(255,255,255,0.2); }
+    .wm { background: #080602; padding: 12px 6vw; text-align: center; }
+    .wm p { font-size: 12px; color: rgba(255,255,255,0.15); }
+    .wm a { color: rgba(201,168,76,0.5); }
+
+    @keyframes fadeUp { from{opacity:0;transform:translateY(18px)} to{opacity:1;transform:translateY(0)} }
+
+    @media(max-width:900px){
+      .nav-links{display:none}
+      .menu-grid{grid-template-columns:1fr 1fr}
+      .about-grid,.manzil-grid{grid-template-columns:1fr}
+      .rev-grid{grid-template-columns:1fr}
+      .bron-cards{grid-template-columns:1fr}
+    }
+    @media(max-width:560px){
+      .menu-grid{grid-template-columns:1fr}
+      .hero-stats{gap:28px}
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">Bahor</div>
+  <div class="nav-links">
+    <a onclick="goto('menu')">Menyu</a>
+    <a onclick="goto('about')">Biz haqimizda</a>
+    <a onclick="goto('bron')">Bron</a>
+    <a onclick="goto('manzil')">Manzil</a>
+  </div>
+  <a href="tel:+998901234567" class="nav-btn">📞 Bron qilish</a>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-inner">
+    <div class="hero-tag">Toshkent — 2018 yildan</div>
+    <h1>Bahor<span>Restaurant</span></h1>
+    <p class="hero-sub">Milliy va yevropa taomlari — eng yangi mahsulotlardan tayyorlangan.<br/>Har bir ovqat — alohida san'at asari.</p>
+    <div class="hero-btns">
+      <a onclick="goto('bron')" class="btn-gold">Stol Bron Qilish →</a>
+      <a onclick="goto('menu')" class="btn-outline">Menyuni Ko'rish</a>
+    </div>
+    <div class="hero-stats">
+      <div><div class="hstat-num">7+</div><div class="hstat-lbl">Yil tajriba</div></div>
+      <div><div class="hstat-num">80+</div><div class="hstat-lbl">Taom turi</div></div>
+      <div><div class="hstat-num">5000+</div><div class="hstat-lbl">Mamnun mehmon</div></div>
+      <div><div class="hstat-num">120</div><div class="hstat-lbl">O'rindiq</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- STRIP -->
+<div class="strip">
+  <span>🕐 10:00 — 23:00 har kuni</span>
+  <span>📍 Toshkent, Chilonzor tumani</span>
+  <span>📞 +998 90 123 45 67</span>
+  <span>✅ Bepul wi-fi</span>
+</div>
+
+<!-- MENU -->
+<section class="sec" id="menu">
+  <div class="sec-center">
+    <div class="sec-tag">Bizning Menyu</div>
+    <h2 class="sec-title">Eng Mashhur Taomlar</h2>
+    <p class="sec-sub">Milliy va yevropa taomlari — eng yangi va sifatli mahsulotlardan tayyorlanadi.</p>
+  </div>
+  <div class="menu-tabs">
+    <div class="mtab active">Milliy Taomlar</div>
+    <div class="mtab">Yevropa</div>
+    <div class="mtab">Ichimliklar</div>
+    <div class="mtab">Desertlar</div>
+  </div>
+  <div class="menu-grid">
+    <div class="menu-card">
+      <div class="menu-img">🍚</div>
+      <div class="menu-body">
+        <div class="menu-name">O'zbek Oshi</div>
+        <div class="menu-desc">An'anaviy uslubda pishirilgan mazali palov. Sabzi, go'sht va ziravorlar bilan.</div>
+        <div class="menu-footer">
+          <div class="menu-price">35 000 so'm</div>
+          <span class="menu-badge badge-hit">🔥 Bestseller</span>
+        </div>
+      </div>
+    </div>
+    <div class="menu-card">
+      <div class="menu-img">🍢</div>
+      <div class="menu-body">
+        <div class="menu-name">Qo'zichoq Shashligi</div>
+        <div class="menu-desc">Yangi qo'zichoq go'shtidan tayyorlangan, ko'mir ustida pishirilgan.</div>
+        <div class="menu-footer">
+          <div class="menu-price">55 000 so'm</div>
+          <span class="menu-badge badge-hit">⭐ Top</span>
+        </div>
+      </div>
+    </div>
+    <div class="menu-card">
+      <div class="menu-img">🥩</div>
+      <div class="menu-body">
+        <div class="menu-name">Beef Steak</div>
+        <div class="menu-desc">Yevropa uslubida tayyorlangan marbled go'sht steyki, sous bilan.</div>
+        <div class="menu-footer">
+          <div class="menu-price">85 000 so'm</div>
+          <span class="menu-badge badge-eu">🌍 Yevropa</span>
+        </div>
+      </div>
+    </div>
+    <div class="menu-card">
+      <div class="menu-img">🍝</div>
+      <div class="menu-body">
+        <div class="menu-name">Pasta Carbonara</div>
+        <div class="menu-desc">Italyan uslubidagi pasta, bacon va parmezan pishloq bilan.</div>
+        <div class="menu-footer">
+          <div class="menu-price">48 000 so'm</div>
+          <span class="menu-badge badge-new">✨ Yangi</span>
+        </div>
+      </div>
+    </div>
+    <div class="menu-card">
+      <div class="menu-img">🍲</div>
+      <div class="menu-body">
+        <div class="menu-name">Lag'mon</div>
+        <div class="menu-desc">Uy qo'li bilan yoylangan qo'l lag'mon, mol go'shti va sabzavotlar bilan.</div>
+        <div class="menu-footer">
+          <div class="menu-price">30 000 so'm</div>
+          <span class="menu-badge badge-hit">🔥 Mashhur</span>
+        </div>
+      </div>
+    </div>
+    <div class="menu-card">
+      <div class="menu-img">🥗</div>
+      <div class="menu-body">
+        <div class="menu-name">Grill Salat</div>
+        <div class="menu-desc">Yangi ko'katlar, grill tovuq, pomidor va limon sousi bilan.</div>
+        <div class="menu-footer">
+          <div class="menu-price">28 000 so'm</div>
+          <span class="menu-badge badge-new">🌿 Yangi</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section class="sec" id="about">
+  <div class="about-grid">
+    <div class="about-emoji-wall">
+      <div class="ae-card"><div class="ae-icon">👨‍🍳</div><div class="ae-title">Tajribali Oshpaz</div><div class="ae-sub">10+ yil tajriba</div></div>
+      <div class="ae-card"><div class="ae-icon">🌿</div><div class="ae-title">Yangi Mahsulot</div><div class="ae-sub">Har kuni yangi</div></div>
+      <div class="ae-card"><div class="ae-icon">🏆</div><div class="ae-title">Mukofotlar</div><div class="ae-sub">3 ta restoran mukofoti</div></div>
+      <div class="ae-card"><div class="ae-icon">❤️</div><div class="ae-title">Mehr bilan</div><div class="ae-sub">Har bir taom</div></div>
+    </div>
+    <div class="about-right">
+      <div class="sec-tag">Biz Haqimizda</div>
+      <h2 class="sec-title">Milliy va Yevropa<br/>ta'mlarining uyg'unligi</h2>
+      <p class="sec-sub">2018 yildan buyon Toshkentdagi eng yaxshi restoran sifatida tanilgan Bahor Restaurant — har bir mehmoniga alohida e'tibor qaratadi.</p>
+      <div class="about-list">
+        <div class="al-item"><div class="al-dot"></div><div class="al-text">Faqat eng yangi va sifatli mahsulotlardan foydalaniladi</div></div>
+        <div class="al-item"><div class="al-dot"></div><div class="al-text">80 dan ortiq milliy va yevropa taomlari</div></div>
+        <div class="al-item"><div class="al-dot"></div><div class="al-text">Oilaviy va korporativ ziyofatlar uchun alohida zallar</div></div>
+        <div class="al-item"><div class="al-dot"></div><div class="al-text">Bepul avtoturargoh va wi-fi</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- BRON -->
+<section class="sec" id="bron">
+  <div class="bron-inner">
+    <div class="sec-tag">Stol Bron Qilish</div>
+    <h2 class="sec-title" style="color:#fff">Bugun Bron Qiling</h2>
+    <p class="sec-sub">Telefon yoki Telegram orqali bron qiling — 2 daqiqada tasdiqlashadi.</p>
+    <div class="bron-cards">
+      <div class="bron-card"><div class="bc-icon">🕐</div><div class="bc-title">Ish Vaqti</div><div class="bc-val">10:00 — 23:00</div></div>
+      <div class="bron-card"><div class="bc-icon">👥</div><div class="bc-title">Sig'im</div><div class="bc-val">120 o'rindiq</div></div>
+      <div class="bron-card"><div class="bc-icon">🎉</div><div class="bc-title">Ziyofat Zali</div><div class="bc-val">50 kishigacha</div></div>
+    </div>
+    <div class="bron-btns">
+      <a href="https://t.me/bahorrestaurant" target="_blank" class="btn-tg">✈️ Telegram</a>
+      <a href="tel:+998901234567" class="btn-call">📞 +998 90 123 45 67</a>
+    </div>
+  </div>
+</section>
+
+<!-- REVIEWS -->
+<section class="sec" id="reviews">
+  <div class="sec-center">
+    <div class="sec-tag">Mehmonlar Fikri</div>
+    <h2 class="sec-title">Ular Nima Deydi</h2>
+  </div>
+  <div class="rev-grid">
+    <div class="rev-card">
+      <div class="rev-stars">★★★★★</div>
+      <div class="rev-text">"Palov va shashlik hayotimda yegan eng mazali taomlarim! Xizmat ham zo'r, albatta qaytaman."</div>
+      <div class="rev-name">Aziz Karimov</div><div class="rev-loc">Toshkent</div>
+    </div>
+    <div class="rev-card">
+      <div class="rev-stars">★★★★★</div>
+      <div class="rev-text">"Oilamiz bilan tug'ilgan kun nishonladik. Zal juda chiroyli, taomlar ajoyib, narxlar qulay!"</div>
+      <div class="rev-name">Malika Yusupova</div><div class="rev-loc">Toshkent</div>
+    </div>
+    <div class="rev-card">
+      <div class="rev-stars">★★★★★</div>
+      <div class="rev-text">"Beef steak va pasta — ikkalasi ham zo'r! Yevropa taomlari sifati haqiqatan yuqori darajada."</div>
+      <div class="rev-name">Jasur Toshmatov</div><div class="rev-loc">Toshkent</div>
+    </div>
+  </div>
+</section>
+
+<!-- MANZIL -->
+<section class="sec" id="manzil">
+  <div class="manzil-grid">
+    <div class="manzil-info">
+      <h3>Bizni Toping</h3>
+      <div class="minfo-item"><div class="mi-icon">📍</div><div><div class="mi-label">Manzil</div><div class="mi-val">Toshkent sh., Chilonzor tumani,<br/>Bunyodkor shoh ko'chasi 24</div></div></div>
+      <div class="minfo-item"><div class="mi-icon">📞</div><div><div class="mi-label">Telefon</div><div class="mi-val">+998 90 123 45 67</div></div></div>
+      <div class="minfo-item"><div class="mi-icon">🕐</div><div><div class="mi-label">Ish Vaqti</div><div class="mi-val">Har kuni: 10:00 — 23:00</div></div></div>
+      <div class="minfo-item"><div class="mi-icon">✈️</div><div><div class="mi-label">Telegram</div><div class="mi-val">@bahorrestaurant</div></div></div>
+    </div>
+    <div class="map-placeholder">
+      <span>🗺️</span>
+      <span>Chilonzor tumani, Toshkent</span>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-logo">Bahor Restaurant</div>
+  <p>© 2025 Bahor Restaurant. Barcha huquqlar himoyalangan.</p>
+</footer>
+<div class="wm"><p>Sayt <a href="https://t.me/hawebsolutions1">HA Web Solutions</a> tomonidan yaratilgan</p></div>
+
+<script>
+  function goto(id){ const el=document.getElementById(id); if(el) el.scrollIntoView({behavior:'smooth',block:'start'}); }
+  document.querySelectorAll('.mtab').forEach(t=>{
+    t.addEventListener('click',()=>{ document.querySelectorAll('.mtab').forEach(x=>x.classList.remove('active')); t.classList.add('active'); });
+  });
+  const obs=new IntersectionObserver(entries=>{ entries.forEach(e=>{ if(e.isIntersecting){e.target.style.opacity='1';e.target.style.transform='translateY(0)';} }); },{threshold:0.08});
+  document.querySelectorAll('.menu-card,.ae-card,.rev-card').forEach(el=>{ el.style.opacity='0'; el.style.transform='translateY(16px)'; el.style.transition='opacity .5s ease,transform .5s ease'; obs.observe(el); });
+</script>
+</body>
+</html>
+
